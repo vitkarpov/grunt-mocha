@@ -142,6 +142,12 @@ module.exports = function(grunt) {
       run: true,
     });
 
+    phantomjs.on('ufo-coverage-complete', function(coverage) {
+      if (typeof options.onCoverageDone === 'function') {
+        options.onCoverageDone(coverage);
+      }
+    });
+
     // Output console messages if log == true
     if (options.log) {
       phantomjs.removeAllListeners(['console']);
